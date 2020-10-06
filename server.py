@@ -1,16 +1,34 @@
 import os
 from flask import Flask, request, render_template, g, redirect, Response, session, send_from_directory
+from sqlalchemy import *
+from sqlalchemy.pool import NullPool
+
+from dotenv import load_dotenv
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
 
+load_dotenv()
+
+DATABASEURI = 'mysql://' + os.getenv("USERNAME") + ':' + os.getenv("PASSWORD") + '@' + os.getenv("HOSTNAME") + '/' + os.getenv("DATABASE_NAME") + '?charset=utf8'
+engine = create_engine(DATABASEURI)
+
 @app.before_request
 def before_request():
-    pass
+    try:
+        g.conn = engine.connect()
+    except:
+        print("uh oh, problem connecting to database")
+        import traceback
+        traceback.print_exc()
+        g.conn = None
 
 @app.teardown_request
 def teardown_request(exception):
-    pass
+    try:
+        g.conn.close()
+    except Exception as e:
+        pass
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
