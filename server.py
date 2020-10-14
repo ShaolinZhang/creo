@@ -2,6 +2,8 @@ import os
 from flask import Flask, request, render_template, g, redirect, Response, session, send_from_directory
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 from dotenv import load_dotenv
 
@@ -38,6 +40,46 @@ def index():
     context['page_name'] = 'Home'
     return render_template("home.html", **context)
 
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    context['page_name'] = 'Log In'
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        query_result = g.conn.execute('SELECT * FROM user WHERE username=%s', username).fetchone()
+        if query_result is not None:
+            if check_password_hash(query_result[2], password):
+                session.clear()
+                session['user'] = username
+                return redirect('/')
+            else:
+                context['login_error_msg'] = 'Incorrect password.'
+                return render_template("login.html", **context)
+        else:
+            context['error_msg'] = 'User does not exist.'
+            return render_template("login.html", **context)
+    return render_template("login.html", **context)
+
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    context['page_name'] = 'Sign Up'
+    if request.method == "POST":
+        username = request.form["username"]
+        email = request.form["email"]
+        password = request.form["password"]
+        try:
+            g.conn.execute('INSERT INTO user(username, email, password) VALUES (%s, %s, %s)', username, email, generate_password_hash(password))
+        except:
+            context['signup_error_msg'] = 'Username already exists.'
+            return render_template("signup.html", **context)
+        return redirect('/login')
+    return render_template("signup.html", **context)
+
+@app.route('/logout', methods=["GET", "POST"])
+def logout():
+    session.clear()
+    return redirect('/login')
+
 if __name__ == "__main__":
 
     import click
@@ -52,6 +94,7 @@ if __name__ == "__main__":
     def run(debug, threaded, host, port):
         HOST, PORT = host, port
         print("running on %s:%d" % (HOST, PORT))
+        app.secret_key = os.getenv("SECRET_KEY")
         app.config['SESSION_TYPE'] = 'filesystem'
         app.run(host=HOST, port=PORT, debug=True, threaded=True)
 
