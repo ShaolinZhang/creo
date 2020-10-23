@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, render_template, g, redirect, session
 from sqlalchemy import create_engine
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_wtf import FlaskForm
 
 from dotenv import load_dotenv
 
@@ -44,7 +45,11 @@ def teardown_request(exception):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     context['page_name'] = 'Home'
-    return render_template("home.html", **context)
+    if session.get('user'):
+        context['username'] = session['user']
+        return render_template("home.html", **context)
+    else:
+        return redirect("/login")
 
 
 @app.route('/login', methods=["GET", "POST"])
