@@ -2,7 +2,6 @@ import os
 from flask import Flask, request, render_template, g, redirect, session
 from sqlalchemy import create_engine
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_wtf import FlaskForm
 
 from dotenv import load_dotenv
 
@@ -55,6 +54,7 @@ def index():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     context['page_name'] = 'Log In'
+    session.clear()
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]

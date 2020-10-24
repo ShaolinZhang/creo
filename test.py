@@ -82,9 +82,4 @@ def client(app):
 
 def test_index(app, client):
     res = client.get('/')
-    assert res.status_code == 200
-
-
-def test_login(app, client):
-    res = client.get('/')
-    assert res.status_code == 200
+    assert res.status_code == 302
