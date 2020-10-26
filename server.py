@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, render_template, g, redirect, session
 from sqlalchemy import create_engine
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from forms import DealForm, ContactForm
 from dotenv import load_dotenv
 
 tmpl_dir = os.path.join(os.path.dirname(
@@ -100,6 +100,50 @@ def signup():
 def logout():
     session.clear()
     return redirect('/login')
+
+
+@app.route('/success')
+def success():
+    context['page_name'] = 'Success'
+    return render_template('success.html', **context)
+
+
+@app.route('/newDeal', methods=['GET', 'POST'])
+def new_deal():
+    context['page_name'] = 'New Deal'
+    form = DealForm()
+    if form.validate_on_submit():
+        try:
+            g.conn.execute(
+                'INSERT INTO deal(addedBy, projectName, \
+                projectScore, teamScore, projectStatus, industry, memo) \
+                VALUES (%s, %s, %s, %s, %s, %s, %s)', session['user'],
+                form.projectName.data, form.projectScore.data,
+                form.teamScore.data, form.projectStatus.data,
+                form.industry.data, form.memo.data
+            )
+            return redirect('/success')
+        except Exception:
+            return render_template('new_deal.html', form=form, **context)
+    return render_template('new_deal.html', form=form, **context)
+
+
+@app.route('/newContact', methods=['GET', 'POST'])
+def new_contact():
+    context['page_name'] = 'New Contact'
+    form = ContactForm()
+    if form.validate_on_submit():
+        try:
+            g.conn.execute(
+                'INSERT INTO contact(addedBy, contactName, \
+                contactMethod, contactNote) VALUES (%s, %s, %s, %s)',
+                session['user'], form.contactName.data,
+                form.contactMethod.data, form.contactNote.data
+            )
+            return redirect('/success')
+        except Exception:
+            return render_template('new_contact.html', form=form, **context)
+    return render_template('new_contact.html', form=form, **context)
 
 
 if __name__ == "__main__":
