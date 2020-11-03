@@ -1,7 +1,15 @@
 # Creo
+Link to repo: https://github.com/ShaolinZhang/creo
+Link to documentation: https://creo.readthedocs.io/en/latest/
 
-![travis-ci](https://travis-ci.com/ShaolinZhang/creo.svg?branch=master)
-
-[![codecov](https://codecov.io/gh/ShaolinZhang/creo/branch/master/graph/badge.svg?token=UA8OZYWWSW)](https://codecov.io/gh/ShaolinZhang/creo)
+![travis-ci](https://travis-ci.com/ShaolinZhang/creo.svg?branch=master) [![codecov](https://codecov.io/gh/ShaolinZhang/creo/branch/master/graph/badge.svg?token=UA8OZYWWSW)](https://codecov.io/gh/ShaolinZhang/creo) ![License](https://img.shields.io/github/license/ShaolinZhang/creo) ![Documentation Status](https://readthedocs.org/projects/creo/badge/?version=latest)](https://creo.readthedocs.io/en/latest/?badge=latest)
 
 Creo is an open source VC deal and lead management platform built with Flask.
+
+## Background and Motivation
+
+Earlier this semester, a few friends and I started a pre-seed VC fund. We were on the market searching for a VC deal and source management platform and soon realized that there is no inexpensive option out there. Additionally, I find it important to store all our data in-house for compliance purposes. Therefore, I started to create this open source deal management platform that can extend easily to include more features.
+
+## Project
+
+The project is a Flask-based information log and view system. I used Flask-WTF and wtform to render forms and extensive SQL queries to add new, modify and list all logs.

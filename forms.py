@@ -24,8 +24,8 @@ class DealForm(FlaskForm):
         'Project Status',
         choices=[('', ''), ('passed', 'Passed'), ('follow-up', 'Followed Up'),
                  ('in-dd', 'In Due Diligence'), ('ic-pending', 'Waiting \
-                 for IC'), ('ic-aye', 'IC Accepted'), ('ic-nay', 'IC Reje\
-                 cted'), ('in-portfolio', 'In Portfolio')]
+                 for IC'), ('ic-aye', 'IC Accepted'), ('ic-nay', 'IC \
+                 Rejected'), ('in-portfolio', 'In Portfolio')]
     )
     industry = StringField(
         'Industry',
