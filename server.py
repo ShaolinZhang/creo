@@ -153,7 +153,7 @@ def list_deals():
         deals = g.conn.execute('SELECT * FROM deal ORDER BY id DESC')
         context['deals'] = deals
         return render_template('list_deals.html', **context)
-    except:
+    except Exception:
         print("Error executing list_deals query")
     return render_template('list_deals.html', **context)
 
@@ -165,15 +165,18 @@ def list_contacts():
         contacts = g.conn.execute('SELECT * FROM contact ORDER BY id DESC')
         context['contacts'] = contacts
         return render_template('list_contacts.html', **context)
-    except:
+    except Exception:
         print("Error executing list_contacts query")
     return render_template('list_contacts.html', **context)
 
 
-@app.route('/viewDeal/<id>', methods = ['GET', 'POST'])
+@app.route('/viewDeal/<id>', methods=['GET', 'POST'])
 def view_deal(id):
     context['page_name'] = 'View Details'
-    deal = g.conn.execute('SELECT * FROM deal WHERE id="{}"'.format(id)).fetchone()
+    deal = g.conn.execute(
+        'SELECT * FROM deal \
+        WHERE id="{}"'.format(id)
+    ).fetchone()
     if deal is not None:
         context['deal'] = deal
         return render_template("view_deal.html", **context)
