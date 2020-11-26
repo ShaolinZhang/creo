@@ -17,5 +17,8 @@ The project is a Flask-based information log and view system. I used Flask-WTF a
 
 ## Demo
 
-Live demo available at: http://208.167.248.6:8080/
-Login: test/test
+![Home Screen](example/img/home.png)
+![New Deal](example/img/new_deal.png)
+![View Deals](example/img/view_deals.png)
+![View Deal](example/img/view_deal.png)
+![View Contacts](example/img/view_contacts.png)
