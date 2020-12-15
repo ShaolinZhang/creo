@@ -13,6 +13,9 @@ load_dotenv('.env.dev')
 DATABASEURI = 'mysql://' + os.getenv("USERNAME") + ':' + os.getenv("PASSWORD") + '@' + os.getenv("HOSTNAME") + '/' + os.getenv("DATABASE_NAME") + '?charset=utf8'
 engine = create_engine(DATABASEURI)
 
+context = dict()
+context['company_name'] = os.getenv("COMPANY_NAME")
+
 @app.before_request
 def before_request():
     try:
@@ -32,7 +35,8 @@ def teardown_request(exception):
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-    pass
+    context['page_name'] = 'Home'
+    return render_template("home.html", **context)
 
 if __name__ == "__main__":
 
@@ -50,3 +54,5 @@ if __name__ == "__main__":
         print("running on %s:%d" % (HOST, PORT))
         app.config['SESSION_TYPE'] = 'filesystem'
         app.run(host=HOST, port=PORT, debug=True, threaded=True)
+
+    run()
