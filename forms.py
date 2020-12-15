@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, FileField
+from wtforms import StringField, SelectField
+# from wtforms import FileField
 from wtforms.widgets import TextArea
 from wtforms.validators import InputRequired, Length
 
@@ -34,9 +35,9 @@ class DealForm(FlaskForm):
         'Memo',
         widget=TextArea()
     )
-    fileUpload = FileField(
-        'BP Upload'
-    )
+    # fileUpload = FileField(
+    #     'BP Upload'
+    # )
 
 
 class ContactForm(FlaskForm):
