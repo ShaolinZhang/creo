@@ -44,12 +44,17 @@ def teardown_request(exception):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     context['page_name'] = 'Home'
-    return render_template("home.html", **context)
+    if session.get('user'):
+        context['username'] = session['user']
+        return render_template("home.html", **context)
+    else:
+        return redirect("/login")
 
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
     context['page_name'] = 'Log In'
+    session.clear()
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
