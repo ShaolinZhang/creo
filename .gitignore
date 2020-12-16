@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 *.coverage
 .pytest_cache/
-docs/build
+doc/build
 .DS_Store
-docs/source/_*/
+doc/_*/
+_*/

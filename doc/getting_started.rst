@@ -31,8 +31,21 @@ Modify ``.env.dev`` to include database connection information:
     PASSWORD=<YOUR_PASSWORD>
     DATABASE_NAME=<YOUR_DB_NAME>
 
-
 Initialize your database by running the database initialization script:
 ::
 
     $ python scripts/init_db.py
+
+If successful, you will see the following output from terminal:
+::
+
+    Connection to MySQL DB successful
+    Query executed successfully
+    Query executed successfully
+    Query executed successfully
+    Database initialization successful
+
+Customizing Appearances
+========================
+
+All strings for customizing appearances are also in the ``.env.dev`` file such as company name.
