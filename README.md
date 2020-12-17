@@ -1,8 +1,9 @@
 # Creo
 Link to repo: https://github.com/ShaolinZhang/creo
 Link to documentation: https://creo.readthedocs.io/en/latest/
+Link to GitHub page: https://shaolinzhang.github.com/
 
-![travis-ci](https://travis-ci.com/ShaolinZhang/creo.svg?branch=master) [![codecov](https://codecov.io/gh/ShaolinZhang/creo/branch/master/graph/badge.svg?token=UA8OZYWWSW)](https://codecov.io/gh/ShaolinZhang/creo) ![License](https://img.shields.io/github/license/ShaolinZhang/creo) ![Documentation Status](https://readthedocs.org/projects/creo/badge/?version=latest)](https://creo.readthedocs.io/en/latest/?badge=latest)
+![travis-ci](https://travis-ci.com/ShaolinZhang/creo.svg?branch=master) [![codecov](https://codecov.io/gh/ShaolinZhang/creo/branch/master/graph/badge.svg?token=UA8OZYWWSW)](https://codecov.io/gh/ShaolinZhang/creo) ![License](https://img.shields.io/github/license/ShaolinZhang/creo) ![Documentation Status](https://readthedocs.org/projects/creo/badge/?version=latest)
 
 Creo is an open source VC deal and lead management platform built with Flask.
 
@@ -13,3 +14,8 @@ Earlier this semester, a few friends and I started a pre-seed VC fund. We were o
 ## Project
 
 The project is a Flask-based information log and view system. I used Flask-WTF and wtform to render forms and extensive SQL queries to add new, modify and list all logs.
+
+## Demo
+
+Live demo available at: http://208.167.248.6:8080/
+Login: test/test

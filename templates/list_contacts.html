@@ -1,0 +1,30 @@
+{% extends 'dashboard.html' %}
+
+{% block body %}
+
+{{ status_msg }}
+
+<div class="table-responsive">
+    <p>
+      <table class="table table-hover">
+      <thead>
+      <tr>
+      <th>Contact Name</th>
+      <th>Contact Method</th>
+      <th>Contact Note</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+    {% for contact in contacts %}
+      <td>{{ contact[2] }}</td>
+      <td>{{ contact[3] }}</td>
+      <td>{{ contact[4] }}</td>
+      </tr>
+     {% endfor %}
+      </tbody>
+      </table>
+    </p>
+</div>
+
+{% endblock %}

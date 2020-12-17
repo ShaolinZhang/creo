@@ -14,7 +14,7 @@ Quick Start
 Retrieve the latest code from GitHub source:
 ::
 
-    $ git clone git@github.com:ShaolinZhang/creo.git
+    $ git clone git://github.com/ShaolinZhang/creo.git
     $ cd creo
 
 Assuming you have Python already, install all dependencies:
@@ -45,6 +45,11 @@ If successful, you will see the following output from terminal:
     Query executed successfully
     Database initialization successful
 
+Run ``server.py`` to see Creo live:
+::
+
+    $ python server.py
+    
 Customizing Appearances
 ========================
 

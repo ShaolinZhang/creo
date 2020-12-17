@@ -146,6 +146,45 @@ def new_contact():
     return render_template('new_contact.html', form=form, **context)
 
 
+@app.route('/listDeals', methods=['GET'])
+def list_deals():
+    context['page_name'] = 'View Deals'
+    try:
+        deals = g.conn.execute('SELECT * FROM deal ORDER BY id DESC')
+        context['deals'] = deals
+        return render_template('list_deals.html', **context)
+    except Exception:
+        print("Error executing list_deals query")
+    return render_template('list_deals.html', **context)
+
+
+@app.route('/listContacts', methods=['GET'])
+def list_contacts():
+    context['page_name'] = 'View Contacts'
+    try:
+        contacts = g.conn.execute('SELECT * FROM contact ORDER BY id DESC')
+        context['contacts'] = contacts
+        return render_template('list_contacts.html', **context)
+    except Exception:
+        print("Error executing list_contacts query")
+    return render_template('list_contacts.html', **context)
+
+
+@app.route('/viewDeal/<id>', methods=['GET', 'POST'])
+def view_deal(id):
+    context['page_name'] = 'View Details'
+    deal = g.conn.execute(
+        'SELECT * FROM deal \
+        WHERE id="{}"'.format(id)
+    ).fetchone()
+    if deal is not None:
+        context['deal'] = deal
+        return render_template("view_deal.html", **context)
+    else:
+        return render_template("forbidden.html")
+    return render_template('list_deals.html', **context)
+
+
 if __name__ == "__main__":
 
     import click
